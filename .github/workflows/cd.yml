@@ -24,7 +24,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ github.repository_owner }}/domotica:latest
 
       # Deploy a Kubernetes - descomentar cuando haya un cluster disponible
       # - name: Deploy a Kubernetes
