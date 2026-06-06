@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: domotica
+  labels:
+    app: domotica
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: domotica
+  template:
+    metadata:
+      labels:
+        app: domotica
+    spec:
+      containers:
+        - name: domotica
+          image: ghcr.io/mgaona90/domotica:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_HOST
+              value: "0.0.0.0"
+            - name: APP_PORT
+              value: "8000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: domotica
+spec:
+  selector:
+    app: domotica
+  ports:
+    - port: 80
+      targetPort: 8000
+  type: ClusterIP
